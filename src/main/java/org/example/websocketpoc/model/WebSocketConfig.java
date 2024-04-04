@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/endpointChatRoom").
-                setAllowedOrigins("mydomain.com").
+                setAllowedOrigins("zackawesome.net").
                 withSockJS();
         registry.addEndpoint("/chatroom-websocket");
     }
