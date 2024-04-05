@@ -1,39 +1,36 @@
 package org.example.websocketpoc.controller;
 
+import org.example.websocketpoc.model.InGroupMessage;
 import org.example.websocketpoc.model.InMessage;
 import org.example.websocketpoc.model.OutMessage;
-import org.example.websocketpoc.model.WebsocketServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-
-import org.example.websocketpoc.model.ChatMessage;
-import org.springframework.web.util.HtmlUtils;
 
 @Controller
 public class ChatRoomController {
 
     @Autowired
-    private SimpMessagingTemplate template;
+    private SimpMessagingTemplate messageTemplate;
 
-    // anonymous
     @MessageMapping("/channelEndpoint")
-    @SendTo("/topic/chatroom")
-    public WebsocketServerResponse said(ChatMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return new WebsocketServerResponse("FAQ, " + HtmlUtils.htmlEscape(message.getMessage()) + "!");
+//    @SendTo("/chatGroup/chatroom")
+    public void said(InGroupMessage message) throws Exception {
+        // Send the response to the dynamically constructed destination
+        messageTemplate.convertAndSend(
+                "/chatGroup/" + message.getChatGroup(),
+                new OutMessage(message.getFrom()+" send: " + message.getContent()));
     }
 
     @MessageMapping("/ptp/single/chat")
     public void processPtpChatMessage(InMessage message) {
         // Send to Message Receiver
-        template.convertAndSend("/single/chat/"+ message.getTo(),
+        messageTemplate.convertAndSend("/single/chat/"+ message.getTo(),
                 new OutMessage(message.getFrom()+" send: "+ message.getContent()));
         // Send to Message Sender
-        template.convertAndSend("/single/chat/"+ message.getFrom(),
-                new OutMessage(message.getFrom()+" send:"+ message.getContent()));
+        messageTemplate.convertAndSend("/single/chat/"+ message.getFrom(),
+                new OutMessage(message.getFrom()+" send: "+ message.getContent()));
     }
 }
 

@@ -3,12 +3,11 @@
 <head>
     <title>Spring Boot Chat Room</title>
     <meta charset="utf-8"/>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/main.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/chat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="/groupChat.js"></script>
 </head>
 <body>
 
@@ -16,15 +15,20 @@
     <div class="row">
         <div class="col-md-6">
             <form class="form-inline">
+
+                <div class="form-group">
+                    <label for="name">Enter Your Name: </label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="chat-group">Enter Group Name: </label>
+                    <input type="text" id="chat-group" class="form-control" placeholder="Enter group name">
+                </div>
                 <div class="form-group">
                     <label for="connect">WebSocket Connection:</label>
                     <button id="connect" class="btn btn-default" type="submit">Connect</button>
                     <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
                     </button>
-                </div>
-                <div class="form-group">
-                    <label for="name">Enter Name First</label>
-                    <input type="text" id="name" class="form-control" placeholder="Enter your name">
                 </div>
             </form>
         </div>
@@ -43,10 +47,10 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Chat Room</th>
+                    <th>Conversation</th>
                 </tr>
                 </thead>
-                <tbody id="chatRoom">
+                <tbody id="conversation-body">
                 </tbody>
             </table>
         </div>
