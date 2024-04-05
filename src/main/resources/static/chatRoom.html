@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spring Boot簡單聊天室</title>
+    <title>Spring Boot Chat Room</title>
     <meta charset="utf-8"/>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
@@ -17,20 +17,24 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="connect">WebSocket 連接:</label>
-                    <button id="connect" class="btn btn-default" type="submit">連接</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">關閉連接
+                    <label for="connect">WebSocket Connection:</label>
+                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
                     </button>
+                </div>
+                <div class="form-group">
+                    <label for="name">Enter Name First</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your name">
                 </div>
             </form>
         </div>
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="name">發送訊息</label>
-                    <input type="text" id="name" class="form-control" placeholder="請輸入訊息">
+                    <label for="content">Send Message</label>
+                    <input type="text" id="content" class="form-control" placeholder="Enter Message">
                 </div>
-                <button id="send" class="btn btn-default" type="submit">發送</button>
+                <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>
         </div>
     </div>
@@ -39,7 +43,7 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>小海的聊天室</th>
+                    <th>Chat Room</th>
                 </tr>
                 </thead>
                 <tbody id="chatRoom">

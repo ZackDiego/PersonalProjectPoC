@@ -5,8 +5,8 @@ const stompClient = new StompJs.Client({
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/chatroom', (greeting) => {
-        showGreeting(JSON.parse(greeting.body).content);
+    stompClient.subscribe('/topic/chatroom', (result) => {
+        showContent(JSON.parse(result.body).content);
     });
 };
 
@@ -28,7 +28,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    // $("#greetings").html("");
 }
 
 function connect() {
@@ -36,19 +36,21 @@ function connect() {
 }
 
 function disconnect() {
-    stompClient.deactivate();
+    if (stompClient !== null ) {
+        stompClient.deactivate();
+    }
     setConnected(false);
     console.log("Disconnected");
 }
 
 function sendMessage() {
     stompClient.publish({
-        destination: "/app/messageEndpoint",
+        destination: "/app/channelEndpoint",
         body: JSON.stringify({'message': $("#message").val()})
     });
 }
 
-function showGreeting(message) {
+function showContent(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
 
