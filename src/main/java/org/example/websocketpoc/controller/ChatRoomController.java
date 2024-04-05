@@ -31,9 +31,9 @@ public class ChatRoomController {
         // Send to Message Receiver
         template.convertAndSend("/single/chat/"+ message.getTo(),
                 new OutMessage(message.getFrom()+" send: "+ message.getContent()));
-//        // Send to Message Sender
-//        template.convertAndSend("/single/chat/"+ message.getFrom(),
-//                new OutMessage(message.getFrom()+" send:"+ message.getContent()));
+        // Send to Message Sender
+        template.convertAndSend("/single/chat/"+ message.getFrom(),
+                new OutMessage(message.getFrom()+" send:"+ message.getContent()));
     }
 }
 

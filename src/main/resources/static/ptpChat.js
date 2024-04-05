@@ -14,9 +14,9 @@ stompClient.onConnect = (frame) => {
         showContent(JSON.parse(result.body));
     });
 
-    stompClient.subscribe('/single/chat/'+ to, function (result) {
-        showContent(JSON.parse(result.body));
-    });
+    // stompClient.subscribe('/single/chat/'+ to, function (result) {
+    //     showContent(JSON.parse(result.body));
+    // });
 
     console.log("from:" + from);
     console.log("to:" + to);
@@ -40,7 +40,7 @@ function setConnected(connected) {
     else {
         $( "#conversation" ).hide();
     }
-    // $( "#notice").html("" );
+    $( "#conversation-body").html("" );
 }
 
 function connect() {
