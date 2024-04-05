@@ -1,7 +1,7 @@
 
 
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/chatroom-websocket'
+    brokerURL: 'ws://35.72.46.23/chatroom-websocket'
 });
 
 stompClient.onConnect = (frame) => {
@@ -68,7 +68,7 @@ function sendMessage() {
 }
 
 function showContent(body) {
-    $( "#conversation-body").append("<tr><td>" + body.content + "</td></tr>" );
+    $( "#conversation-body").append("<tr><td>" + body.content + "</td> <td>"+new Date(body.time).toLocaleString()+"</td> </tr>" );
 }
 
 $( function () {
