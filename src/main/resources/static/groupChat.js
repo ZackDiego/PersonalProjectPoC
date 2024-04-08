@@ -1,5 +1,5 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://35.72.46.23/chatroom-websocket'
+    brokerURL: 'ws://52.197.96.143/chatroom-websocket'
 });
 
 stompClient.onConnect = (frame) => {
